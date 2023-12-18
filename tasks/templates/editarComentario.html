@@ -1,0 +1,36 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Editar Comentario</h1>
+
+        <form method="POST" class="form">
+            {% csrf_token %}
+        
+            {% for key, value in comentario.items %}
+                {% if key == 'contenido' %}
+                    <div class="form-group">
+                        <label for="contenido">Editar Contenido:</label>
+                        <input type="text" name="contenido" value="{{ value }}" class="form-control">
+                    </div>
+                {% endif %}
+            {% endfor %}
+        
+            <button type="submit" class="btn btn-primary">Editar</button>
+            <a href="#"><button class="btn btn-primary" >Cancelar</button></a>
+        </form>
+    </div>
+</body>
+</html>

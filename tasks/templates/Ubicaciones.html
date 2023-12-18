@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Índice</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-success">
+    <div class="container-fluid">
+        <img src="{% static 'fotos/contenedor.webp' %}" alt="" width="40" height="40">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'index' %}" style="color: #fff; font-size: 18px; font-weight: bold; text-decoration: none;">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'informativo'%}" style="color: #fff; font-size: 18px; font-weight: bold; text-decoration: none;">Info</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #fff; font-size: 18px; font-weight: bold; text-decoration: none;">
+                      Categorias
+                    </a>
+                    
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #fff; border: 1px solid #ccc;">
+                        <li><a class="dropdown-item" href="{% url 'preguntas' %}" style="color: #000; font-weight: bold;">Preguntas</a></li>
+                        <li><a class="dropdown-item" href="{% url 'calculadora' %}" style="color: #000; font-weight: bold;">Calculadora</a></li>
+                        <li><a class="dropdown-item" href="{% url 'Ubicaciones' %}" style="color: #000; font-weight: bold;">Ubicaciones</a></li>
+                        <li><a class="dropdown-item" href="{% url 'Beneficios' %}" style="color: #000; font-weight: bold;">Beneficios</a></li>
+                      </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'somos' %}" style="color: #fff; font-size: 18px; font-weight: bold; text-decoration: none;">Quienes Somos</a>
+                </li>
+            </ul>
+          
+            
+            <div class="navbar-nav ml-auto">
+                {% if request.session.user_id %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img width="30" height="30" src="https://img.icons8.com/material-rounded/24/user.png" alt="user" />
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'Usuario' %}" style="color: #000; font-weight: bold;">Datos Usuario</a></li>
+                    <li><a class="dropdown-item" href="{% url 'cerrar_sesion' %}" style="color: #000; font-weight: bold;">Cerrar Sesion</a></li>
+                  </ul>
+              </li>
+               <li>
+                  <p class="text-success">.....................</p>
+               </li>
+                {% else %}
+                <!-- Mostrar información cuando la sesión de usuario no existe -->
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'registro' %}">Registrarse</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active m" aria-current="page" href="{% url 'login' %}">Login</a>
+              </li>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+  </nav>
+
+
+
+
+    <div class="container py-5">
+      <h1 class="text-center mb-5" style="color: #4285F4; font-size: 36px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">Ubicacion contenedores</h1>
+      <div class="row">
+        <!-- Primera foto -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="{% static 'fotos/contenedores.jpg' %}" alt="Foto 1" class="card-img-top" />
+            <div class="card-body">
+              <h5 class="card-title">Primer pasillo</h5>
+              <p class="card-text">Ubicado en el primer pasillo principal del campus, cerca de la entrada principal o en un área de alta circulación, se encuentra un contenedor de reciclaje identificado con el color verde y la etiqueta "Residuos Orgánicos". Este contenedor es específico para depositar restos de comida, residuos de jardín y otros materiales biodegradables.</p>
+              <a href="https://www.nunoa.cl/portal-de-servicios/retiro-y-gestion-de-reciclaje/">Ñuñoa</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Segunda foto -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="{% static 'fotos/puente.png' %}" alt="Foto 2" class="card-img-top" />
+            <div class="card-body">
+              <h5 class="card-title">Reciclaje Puente Alto</h5>
+              <p class="card-text">La presencia de centros de reciclaje en Puente Alto facilita a los residentes el acceso a un lugar cercano donde pueden llevar sus materiales reciclables, fomentando así la participación activa de la comunidad en la reducción de residuos y el cuidado del entorno.</p>
+              <a href="https://medioambiente.mpuentealto.cl/?page_id=13928">Puente Alto</a>
+            </div>
+          </div>
+        </div>
+
+         <!-- Tercera foto -->
+         <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="{% static 'fotos/reina.png' %}" alt="Foto 3" class="card-img-top" />
+            <div class="card-body">
+              <h5 class="card-title">Reciclaje La Reina</h5>
+              <p class="card-text">Además de la recolección y clasificación de materiales, algunos centros de reciclaje en La Reina ofrecen servicios de educación ambiental y concientización para fomentar prácticas sostenibles en la comunidad. Estos servicios pueden incluir capacitaciones, talleres y actividades didácticas que promueven la importancia del reciclaje y la adopción de hábitos responsables con el medio ambiente.</p>
+              <a href="https://www.lareina.cl/la-reina-recicla/">La Reina</a>
+            </div>
+          </div>
+        </div>
+
+         <!-- Cuarta foto -->
+         <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="{% static 'fotos/joaquin.png' %}" alt="Foto 4" class="card-img-top" />
+            <div class="card-body">
+              <h5 class="card-title">Reciclaje San Joaquin</h5>?
+              <p class="card-text">Al visitar el centro, podrás aprender más sobre la importancia del reciclaje y cómo puedes hacer tu parte para cuidar el planeta. Puedes participar en programas educativos y actividades relacionadas con la concienciación ambiental, fortaleciendo tu compromiso con prácticas responsables y sustentables.</p>
+              <a href="https://sanjoaquin.cl/2022/03/02/san-joaquin-sustentableque-puedo-reciclar-y-que-no/">San Joaquin</a>
+            </div>
+          </div>
+        </div>
+
+         <!-- Quinta foto -->
+         <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="{% static 'fotos/florida.png' %}" alt="Foto 5" class="card-img-top" />
+            <div class="card-body">
+              <h5 class="card-title">Reciclaje La Florida</h5>
+              <p class="card-text">El centro de reciclaje de La Florida te ofrece la oportunidad de llevar tus materiales reciclables, como papel, cartón, plástico, vidrio y metal. Al hacerlo, estarás contribuyendo activamente a la protección del entorno y a la preservación de los recursos naturales. Estos centros se encargan de recibir y clasificar los materiales para su posterior procesamiento y reciclaje.</p>
+              <a href="https://www.laflorida.cl/sitio/la-florida-recicla/">La Florida</a>
+            </div>
+          </div>
+        </div>
+
+         <!-- Sexta foto -->
+         <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="{% static 'fotos/santiagocentro.jpg' %}" alt="Foto 6" class="card-img-top" />
+            <div class="card-body">
+              <h5 class="card-title">Reciclaje Santiago Centro</h5>
+              <p class="card-text">Además de la función de recepción de residuos, el centro de reciclaje ofrece programas educativos y actividades relacionadas con la concienciación ambiental. Podrás aprender más sobre la importancia del reciclaje, cómo separar adecuadamente los materiales y qué impacto positivo tiene en el medio ambiente. Participar en estas actividades fortalecerá tu compromiso con prácticas responsables y sostenibles.</p>
+              <a href="https://www.cualestuhuella.cl/noticia/puntos-limpios/2021/01/puntos-limpios-reciclaje-santiago-centro">Santiago Centro</a>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+
+
+  <br><br><br><br<br><br><br><br><br><br>
+  <footer class="footer bg-dark text-light"> 
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <h5>Contacto</h5>
+            <p>Dirección: Calle Mr.Champions, Al Nassr</p>
+            <p>Teléfono: +123456789</p>
+            <p>Email: elfuturoeshoy@mr.champions.com</p>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <h5>Enlaces</h5>
+            <ul class="list-unstyled">
+              <li><a href="{% url 'index'%}">Inicio</a></li>
+              <li><a href="{% url 'Ubicaciones' %}">Ubicaciones</a></li>
+              <li><a href="{% url 'somos' %}">Quienes Somos</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <h5>Suscríbete</h5>
+            <p>Recibe nuestras últimas noticias y informes sobre el medio ambiente</p>
+            <form>
+              <div class="input-group mb-3">
+                <input type="email" class="form-control" placeholder="Correo electrónico" aria-label="Correo electrónico" aria-describedby="button-addon2">
+                <button class="btn btn-outline-light" type="button" id="button-addon2">Suscribirse</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <p class="text-muted">&copy; 2023 El Futuro Es Hoy</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>   
+</body>
+</html>
+

@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Índice</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-success">
+    <div class="container-fluid">
+        <img src="{% static 'fotos/contenedor.webp' %}" alt="" width="40" height="40">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'index' %}" style="color: #fff; font-size: 18px; font-weight: bold; text-decoration: none;">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'informativo'%}" style="color: #fff; font-size: 18px; font-weight: bold; text-decoration: none;">Info</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #fff; font-size: 18px; font-weight: bold; text-decoration: none;">
+                      Categorias
+                    </a>
+                    
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #fff; border: 1px solid #ccc;">
+                        <li><a class="dropdown-item" href="{% url 'preguntas' %}" style="color: #000; font-weight: bold;">Preguntas</a></li>
+                        <li><a class="dropdown-item" href="{% url 'calculadora' %}" style="color: #000; font-weight: bold;">Calculadora</a></li>
+                        <li><a class="dropdown-item" href="{% url 'Ubicaciones' %}" style="color: #000; font-weight: bold;">Ubicaciones</a></li>
+                        <li><a class="dropdown-item" href="{% url 'Beneficios' %}" style="color: #000; font-weight: bold;">Beneficios</a></li>
+                      </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'somos' %}" style="color: #fff; font-size: 18px; font-weight: bold; text-decoration: none;">Quienes Somos</a>
+                </li>
+            </ul>
+          
+            
+            <div class="navbar-nav ml-auto">
+                {% if request.session.user_id %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img width="30" height="30" src="https://img.icons8.com/material-rounded/24/user.png" alt="user" />
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'Usuario' %}" style="color: #000; font-weight: bold;">Datos Usuario</a></li>
+                    <li><a class="dropdown-item" href="{% url 'cerrar_sesion' %}" style="color: #000; font-weight: bold;">Cerrar Sesion</a></li>
+
+                  </ul>
+              </li>
+               <li>
+                  <p class="text-success">.....................</p>
+               </li>
+                {% else %}
+                <!-- Mostrar información cuando la sesión de usuario no existe -->
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'registro' %}">Registrarse</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active m" aria-current="page" href="{% url 'login' %}">Login</a>
+              </li>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
+
+     
+
+
+<main role="main" class="container">
+
+    <img src="{% static 'fotos/beneficios.PNG' %}"  class="img-fluid "  >
+    <div class="blog-main">
+  <hr>
+      <div class="blog-post">
+        <h2 class="blog-post-title" style="color: #333; font-size: 28px; font-weight: bold;">Actualidad</h2>
+        <p class="blog-post-meta" style="color: #777; font-size: 14px;">1 de abril 2023</p>
+        <p>
+          El reciclaje de materiales ofrece una amplia gama de beneficios para el medio ambiente y la sociedad. Al reutilizar y procesar residuos, contribuimos a la conservación de recursos naturales, la reducción de la contaminación y la promoción de la sostenibilidad.
+        </p>
+        <hr>
+        <p style="color: #555; font-size: 16px; line-height: 1.6;">
+          Al reciclar, podemos disminuir la cantidad de residuos enviados a los vertederos, evitando así la acumulación de basura y la emisión de gases de efecto invernadero. Además, el reciclaje ayuda a conservar la energía, ya que en muchos casos se requiere menos energía para producir nuevos productos a partir de materiales reciclados en comparación con la fabricación desde cero.
+        </p>
+        <p style="color: #555; font-size: 16px; line-height: 1.6;">
+          Otra ventaja del reciclaje es la reducción de la deforestación. Al reciclar papel y madera, evitamos la tala de árboles, lo que a su vez ayuda a preservar los ecosistemas naturales y la biodiversidad. Asimismo, el reciclaje de metales contribuye a ahorrar recursos naturales no renovables y a disminuir la contaminación generada por la extracción y producción de nuevos metales.
+        </p>
+        <br>
+        <p style="color: #555; font-size: 16px; line-height: 1.6;">
+          Además de los beneficios ambientales, el reciclaje también puede generar empleo y contribuir al desarrollo económico. La industria del reciclaje crea puestos de trabajo en la recolección, clasificación y procesamiento de materiales reciclables, lo que impulsa la economía local y fomenta la innovación tecnológica en el sector.
+        </p>
+      </div>
+    </div>
+  </main>
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <footer class="footer bg-dark text-light"> 
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4 col-md-6">
+              <h5>Contacto</h5>
+              <p>Dirección: Calle Mr.Champions, Al Nassr</p>
+              <p>Teléfono: +123456789</p>
+              <p>Email: elfuturoeshoy@mr.champions.com</p>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <h5>Enlaces</h5>
+              <ul class="list-unstyled">
+                <li><a href="{% url 'index'%}">Inicio</a></li>
+                <li><a href="{% url 'Ubicaciones' %}">Ubicaciones</a></li>
+                <li><a href="{% url 'somos' %}">Quienes Somos</a></li>
+              </ul>
+            </div>
+            <div class="col-lg-4">
+              <h5>Suscríbete</h5>
+              <p>Recibe nuestras últimas noticias y informes sobre el medio ambiente</p>
+              <form>
+                <div class="input-group mb-3">
+                  <input type="email" class="form-control" placeholder="Correo electrónico" aria-label="Correo electrónico" aria-describedby="button-addon2">
+                  <button class="btn btn-outline-light" type="button" id="button-addon2">Suscribirse</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <p class="text-muted">&copy; 2023 El Futuro Es Hoy</p>
+            </div>
+          </div>
+        </div>
+    </footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>   
+</body>
+</html>

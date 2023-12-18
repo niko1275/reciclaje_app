@@ -1,0 +1,232 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Índice</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-success">
+    <div class="container-fluid">
+        <img src="{% static 'fotos/contenedor.webp' %}" alt="" width="40" height="40">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'index' %}" style="color: #fff; font-size: 18px; font-weight: bold; text-decoration: none;">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'informativo'%}" style="color: #fff; font-size: 18px; font-weight: bold; text-decoration: none;">Info</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #fff; font-size: 18px; font-weight: bold; text-decoration: none;">
+                      Categorias
+                    </a>
+                    
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #fff; border: 1px solid #ccc;">
+                        <li><a class="dropdown-item" href="{% url 'preguntas' %}" style="color: #000; font-weight: bold;">Preguntas</a></li>
+                        <li><a class="dropdown-item" href="{% url 'calculadora' %}" style="color: #000; font-weight: bold;">Calculadora</a></li>
+                        <li><a class="dropdown-item" href="{% url 'Ubicaciones' %}" style="color: #000; font-weight: bold;">Ubicaciones</a></li>
+                        <li><a class="dropdown-item" href="{% url 'Beneficios' %}" style="color: #000; font-weight: bold;">Beneficios</a></li>
+                      </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'somos' %}" style="color: #fff; font-size: 18px; font-weight: bold; text-decoration: none;">Quienes Somos</a>
+                </li>
+            </ul>
+          
+            
+            <div class="navbar-nav ml-auto">
+                {% if request.session.user_id %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img width="30" height="30" src="https://img.icons8.com/material-rounded/24/user.png" alt="user" />
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'Usuario' %}" style="color: #000; font-weight: bold;">Datos Usuario</a></li>
+                    <li><a class="dropdown-item" href="{% url 'cerrar_sesion' %}" style="color: #000; font-weight: bold;">Cerrar Sesion</a></li>
+                  </ul>
+              </li>
+               <li>
+                  <p class="text-success"></p>
+               </li>
+
+                    
+                
+                {% else %}
+               
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'registro' %}">Registrarse</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link active m" aria-current="page" href="{% url 'login' %}">Login</a>
+                    </li>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
+    
+<div class="container bg-light">
+    {% if request.session.user_id %}
+    <div class="row mt-4">
+      <div class="col-md-12">
+        
+        <form method="POST">
+          {% csrf_token %}
+          <br>
+          <div class="mb-2">
+            <label for="pregunta" class="form-label">Ingresar Pregunta</label>
+            <input type="text" class="form-control" name="pregunta" >
+          </div>
+          
+          <div class="mb-2">
+            <label for="descripcion" class="form-label">Agregar Descripción</label>
+            <input type="text" class="form-control" name="descripcion" id="descripcion">
+          </div>
+
+          
+          <button type="submit" class="btn btn-primary">Realizar Publicacion</button>
+          <br><br>
+        </form>
+         
+      </div>
+    </div>
+    {%endif%}
+    
+    <div class="row">
+      
+      {% for key,valor in preguntas.items %}
+      <div class="col-md-6">
+        <br>
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-neutral-focus text-neutral-content rounded-full w-10">
+                <span class="text-xl">  </span>
+              </div>
+  
+              <div class="ms-2">
+                <p class="card-subtitle text-muted mt-1  fs-2"> Publicado Por / {{ valor.usuario}} <img width="30" height="30" src="https://img.icons8.com/ios-filled/50/user-male-circle.png" alt="user-male-circle"/> </p>
+                <h4 class="card-title">  {{valor.titulo}}</h4>
+             
+                
+              </div>
+            </div>
+          
+            <p class="card-text">{{ valor.descripcion }}</p>
+            <hr class="m-0">
+            <div class=" ">
+              <div class="d-flex justify-content-start mt-1">
+                
+                <a href="{% url 'comentarios' id=key|urlencode %}"  ><img width="20" height="20" src="https://img.icons8.com/ios/50/comments--v1.png" alt="comments--v1"/></a>
+                <p class="font-bold mr-2">
+                  {{ valor.comentarios|length }} Comentario 
+                </p>
+                <form method="POST" action="{% url 'reaccionar' id=key|urlencode %}">
+                  {% csrf_token %}
+                  <input type="image" src="https://img.icons8.com/ios/50/facebook-like--v1.png" width="20" height="20" alt="Me gusta"/>
+                </form>
+
+                <p> {{valor.reacciones|length}}</p>
+              </div>
+              <hr class="m-0">
+                
+                
+                
+                
+                
+                {% if valor.autor == user_id %}
+                    <a href="{% url 'editarPregunta' id=key %}"><button class=" btn btn-primary">Editar</button></a>
+
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                      Borrar
+                    </button>
+                  
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Borrar </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            Para Borrar dale a confirmar.
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <a href="{% url 'borrarComentario' id=key %}"><button type="button" class="btn btn-danger">Confirmar</button></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                {% endif %}
+                
+            </div>
+  
+            
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      
+    </div>
+  </div>
+
+
+
+ 
+  
+  <br><br><br>
+  <footer class="footer bg-dark text-light"> 
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <h5>Contacto</h5>
+            <p>Dirección: Calle Mr.Champions, Al Nassr</p>
+            <p>Teléfono: +123456789</p>
+            <p>Email: elfuturoeshoy@mr.champions.com</p>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <h5>Enlaces</h5>
+            <ul class="list-unstyled">
+              <li><a href="{% url 'index'%}">Inicio</a></li>
+              <li><a href="{% url 'Ubicaciones' %}">Ubicaciones</a></li>
+              <li><a href="{% url 'somos' %}">Quienes Somos</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <h5>Suscríbete</h5>
+            <p>Recibe nuestras últimas noticias y informes sobre el medio ambiente</p>
+            <form>
+              <div class="input-group mb-3">
+                <input type="email" class="form-control" placeholder="Correo electrónico" aria-label="Correo electrónico" aria-describedby="button-addon2">
+                <button class="btn btn-outline-light" type="button" id="button-addon2">Suscribirse</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <p class="text-muted">&copy; 2023 El Futuro Es Hoy</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>   
+
+</body>
+</html>
